@@ -1,11 +1,14 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import { Router, browserHistory } from 'react-router'
+import Routes from './routes'
 import * as serviceWorker from './serviceWorker'
 
 ReactDOM.render(
-  <div>
-    <h1>Hello world!</h1>
-  </div>,
+  <Router
+    history={browserHistory}
+    routes={Routes}
+  />,
   document.getElementById('root')
 )
 
