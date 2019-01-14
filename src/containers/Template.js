@@ -1,22 +1,34 @@
 import React, {Component} from 'react'
-import Button from '@material-ui/core/Button'
+import NavDrawer from '../components/NavDrawer'
+import { Header, Main } from '../styled/Template'
+import Relay from 'react-relay/classic'
 
 class Template extends Component {
   render() {
     return (
       <div>
-        <header>
-          <h1>TicTacTuring</h1>
-          <Button onClick={()=>{console.log("111")}}>
-            Click me
-          </Button>
-        </header>
-        <main>
+        <NavDrawer />
+        <Header>
+          TicTacTuring
+        </Header>
+        <Main>
           {this.props.children}
-        </main>
+        </Main>
       </div>
     )
   }
 }
 
-export default Template
+export default Relay.createContainer(
+  Template, {
+    fragments: {
+      viewer: () => Relay.QL`
+        fragment on Viewer {
+          user {
+            id
+          }
+        }
+      `,
+    }
+  }
+)
